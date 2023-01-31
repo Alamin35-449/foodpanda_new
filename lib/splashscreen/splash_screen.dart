@@ -12,7 +12,7 @@ class MysaplashScreen extends StatefulWidget {
 
 class _MysaplashScreenState extends State<MysaplashScreen> {
   startTimer() {
-    Timer(const Duration(seconds: 8), () async {
+    Timer(const Duration(seconds: 3), () async {
       //akta screen theke onno e akta screen jaite  aita use kora hoi(authentication )
       Navigator.push(
           context,

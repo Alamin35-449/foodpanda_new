@@ -32,7 +32,7 @@ class _auth_screenState extends State<auth_screen> {
             ),
           ),
           title: const Text(
-            'iFood',
+            'Friends',
             style: TextStyle(
               fontSize: 60,
               color: Colors.white,

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:foodpanda/widget/custom_text_field.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 
 class register_screen extends StatefulWidget {
@@ -22,15 +24,33 @@ class _register_screenState extends State<register_screen> {
 
   XFile? imageXfile;
   final ImagePicker _picker = ImagePicker();
-  Future<void> _getImage() async
-  {
-    imageXfile=await _picker.pickImage(source: ImageSource.camera);
+
+  Position? position;
+  List<Placemark>? placemarks; //location dekhar jonnno aita use kora hoi
+
+  Future<void> _getImage() async {
+    imageXfile = await _picker.pickImage(source: ImageSource.camera);
 // kono image add korar jonno ai code use kora hoi ,,niche sodo ai container sathe porichoi koriye dilei hobe
     setState(() {
       imageXfile;
     });
   }
 
+  getCurrentLocation() async {
+    //location dekhar jonno aitao
+    Position newPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    position = newPosition;
+    placemarks = await placemarkFromCoordinates(
+      position!.latitude,
+      position!.longitude,
+    );
+    Placemark pMark = placemarks![0];
+    String completeAddress =
+        '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+
+    locationcontroller.text = completeAddress;
+  } //ai porjonto shop location ar jonno use kora hoise
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +64,7 @@ class _register_screenState extends State<register_screen> {
             ),
             InkWell(
               onTap: () {
-                _getImage();// image add korar jonno use kora hoi
+                _getImage(); // image add korar jonno use kora hoi (coding Cafe.video number 8)
               },
               child: CircleAvatar(
                 radius: MediaQuery.of(context).size.width * 0.20,
@@ -118,7 +138,9 @@ class _register_screenState extends State<register_screen> {
                         Icons.location_on,
                         color: Colors.amber,
                       ),
-                      onPressed: () => print("clicked"),
+                      onPressed: () {
+                        getCurrentLocation();
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.amber,
                         shape: RoundedRectangleBorder(

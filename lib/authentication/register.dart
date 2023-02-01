@@ -22,6 +22,15 @@ class _register_screenState extends State<register_screen> {
 
   XFile? imageXfile;
   final ImagePicker _picker = ImagePicker();
+  Future<void> _getImage() async
+  {
+    imageXfile=await _picker.pickImage(source: ImageSource.camera);
+// kono image add korar jonno ai code use kora hoi ,,niche sodo ai container sathe porichoi koriye dilei hobe
+    setState(() {
+      imageXfile;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +43,9 @@ class _register_screenState extends State<register_screen> {
               height: 17,
             ),
             InkWell(
+              onTap: () {
+                _getImage();// image add korar jonno use kora hoi
+              },
               child: CircleAvatar(
                 radius: MediaQuery.of(context).size.width * 0.20,
                 backgroundColor: Colors.white,

@@ -22,11 +22,11 @@ class _auth_screenState extends State<auth_screen> {
               //app bar ar colors change korar jonno ai code lekha hoi
               gradient: LinearGradient(
                 colors: [
-                  Colors.cyan,
-                  Colors.amber,
+                  Colors.red,
+                  Colors.blue,
                 ],
                 begin: FractionalOffset(1.0, 0.0),
-                end: FractionalOffset(1.0, 1.0),
+                end: FractionalOffset(1.1, 1.0),
                 stops: [0.0, 1.0],
               ),
             ),
@@ -68,8 +68,8 @@ class _auth_screenState extends State<auth_screen> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
-                Colors.amber,
-                Colors.cyan,
+                Colors.red,
+                Colors.blue,
               ],
             ),
           ),

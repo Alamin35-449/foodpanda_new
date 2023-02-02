@@ -29,7 +29,7 @@ class _register_screenState extends State<register_screen> {
   List<Placemark>? placemarks; //location dekhar jonnno aita use kora hoi
 
   Future<void> _getImage() async {
-    imageXfile = await _picker.pickImage(source: ImageSource.camera);
+    imageXfile = await _picker.pickImage(source: ImageSource.gallery);
 // kono image add korar jonno ai code use kora hoi ,,niche sodo ai container sathe porichoi koriye dilei hobe
     setState(() {
       imageXfile;

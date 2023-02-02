@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:foodpanda/widget/custom_text_field.dart';
+import 'package:foodpanda/widget/error_dailog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,7 +51,51 @@ class _register_screenState extends State<register_screen> {
         '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
 
     locationcontroller.text = completeAddress;
-  } //ai porjonto shop location ar jonno use kora hoise
+  }
+
+  //ai porjonto shop location ar jonno use kora hoise
+
+  Future<void> formValidation() async {
+    if (imageXfile == null) {
+      showDialog(
+          context: context,
+          builder: (c) {
+            return Error_dailog(
+              message: "Please Selected an image.",
+            );
+          });
+    } else {
+      if (passwordcontroller.text == confirmPasswordcontroller.text) {
+        //start uploading image
+        if (confirmPasswordcontroller.text.isNotEmpty &&
+            emailcontroller.text.isNotEmpty &&
+            namecontroller.text.isNotEmpty &&
+            phonecontroller.text.isNotEmpty &&
+            locationcontroller.text.isNotEmpty)
+        {
+          //start uploading image
+        }
+        else
+        {
+          showDialog(
+              context: context,
+              builder: (c) {
+                return Error_dailog(
+                  message: "Please write the required info for Registration",
+                );
+              });
+        }
+      } else {
+        showDialog(
+            context: context,
+            builder: (c) {
+              return Error_dailog(
+                message: "password Not match.",
+              );
+            });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,17 +201,18 @@ class _register_screenState extends State<register_screen> {
               height: 30,
             ),
             ElevatedButton(
-              child: Text(
-                "Sign Up",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.purple,
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              ),
-              onPressed: () => print("clicked"),
-            ),
+                child: Text(
+                  "Sign Up",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.purple,
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                ),
+                onPressed: () {
+                  formValidation();
+                }),
           ],
         ),
       ),

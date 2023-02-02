@@ -73,7 +73,7 @@ class _auth_screenState extends State<auth_screen> {
               ],
             ),
           ),
-          child: TabBarView(
+          child: const TabBarView(
             children: [
               login_screen(),
               register_screen(),
